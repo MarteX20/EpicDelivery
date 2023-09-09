@@ -1,6 +1,7 @@
 package capstone.EpicDelivery.Users;
 
 import capstone.EpicDelivery.Users.payloads.UserRequestPayload;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -30,6 +31,12 @@ public class UsersController {
     @GetMapping("/{userId}")
     public User findById(@PathVariable UUID userId) {
         return usersServ.findById(userId);
+    }
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public User createUser(@Valid @RequestBody UserRequestPayload body) {
+        return usersServ.create(body);
     }
 
     @PutMapping("/{userId}")

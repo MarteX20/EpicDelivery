@@ -22,6 +22,7 @@ public class User implements UserDetails {
     private String name;
     private String surname;
 
+    private String address;
     @Column(nullable = false, unique = true)
     private String email;
 
@@ -30,9 +31,10 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    public User(String name, String surname, String email, String password) {
+    public User(String name, String surname,String address, String email, String password) {
         this.name = name;
         this.surname = surname;
+        this.address = address;
         this.email = email;
         this.password = password;
         this.role = Role.USER;
