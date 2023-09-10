@@ -28,6 +28,7 @@ public class User implements UserDetails {
     @Column(nullable = false, unique = true)
     private String email;
 
+    @Transient
     private String password;
     private String tel;
     private String address;
