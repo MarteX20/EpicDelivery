@@ -25,18 +25,19 @@ public class User implements UserDetails {
     private String address;
     @Column(nullable = false, unique = true)
     private String email;
-
+    private String tel;
     private String password;
 
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    public User(String name, String surname,String address, String email, String password) {
+    public User(String name, String surname,String address, String email, String tel, String password) {
         this.name = name;
         this.surname = surname;
         this.address = address;
         this.email = email;
         this.password = password;
+        this.tel = tel;
         this.role = Role.USER;
     }
 

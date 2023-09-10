@@ -9,6 +9,7 @@ public class UserRequestPayload {
     private String name;
     private String surname;
     private String email;
+    private String tel;
     private String password;
     private String address;
 }
