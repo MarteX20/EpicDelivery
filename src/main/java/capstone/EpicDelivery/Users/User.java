@@ -1,5 +1,7 @@
 package capstone.EpicDelivery.Users;
 
+import capstone.EpicDelivery.enums.Role;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,6 +15,7 @@ import java.util.UUID;
 @Data
 @Table(name = "users")
 @NoArgsConstructor
+@JsonIgnoreProperties({ "password", "accountNonExpired", "authorities", "credentialsNonExpired", "accountNonLocked" })
 public class User implements UserDetails {
 
     @Id
@@ -22,11 +25,15 @@ public class User implements UserDetails {
     private String name;
     private String surname;
 
-    private String address;
     @Column(nullable = false, unique = true)
     private String email;
-    private String tel;
+
     private String password;
+    private String tel;
+    private String address;
+
+
+
 
     @Enumerated(EnumType.STRING)
     private Role role;
