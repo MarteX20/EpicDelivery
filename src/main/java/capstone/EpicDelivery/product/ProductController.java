@@ -21,7 +21,7 @@ public class ProductController {
 
     @GetMapping
     public Page<Product> getProducts(@RequestParam(defaultValue = "0") int page,
-                                     @RequestParam(defaultValue = "14") int size,
+                                     @RequestParam(defaultValue = "10") int size,
                                      @RequestParam(defaultValue = "id") String sortBy) {
         return productService.find(page, size, sortBy);
     }

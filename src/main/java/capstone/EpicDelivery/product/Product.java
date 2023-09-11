@@ -18,21 +18,26 @@ public class Product {
     private UUID id;
 
     private String name;
+    @Column(length = 550)
     private String description;
+    private String img;
     private double price;
 
     @Enumerated(EnumType.STRING)
     private Category category;
 
-    public Product(String name, double price, Category category) {
-        this.name = name;
-        this.price = price;
-        this.category = category;
-    }
-
-    public Product(String name, String description, double price) {
+    public Product(String name, String description, String img,double price, Category category) {
         this.name = name;
         this.price = price;
         this.description = description;
+        this.img = img;
+        this.category = category;
+    }
+
+    public Product(String name, String description, String img, double price) {
+        this.name = name;
+        this.price = price;
+        this.description = description;
+        this.img = img;
     }
 }

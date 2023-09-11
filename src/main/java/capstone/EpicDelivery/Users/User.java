@@ -2,6 +2,7 @@ package capstone.EpicDelivery.Users;
 
 import capstone.EpicDelivery.enums.Role;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,6 +10,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
@@ -34,11 +36,12 @@ public class User implements UserDetails {
     private String tel;
     private String address;
 
-
-
-
     @Enumerated(EnumType.STRING)
     private Role role;
+
+//    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+//    @JsonManagedReference
+//    private List<Order> orders = new ArrayList<>();
 
     public User(String name, String surname,String address, String email, String tel, String password) {
         this.name = name;
