@@ -24,17 +24,17 @@ public class ProductService {
         this.productRepo = productRepository;
     }
 
-    @PostConstruct
-    public void init() {
-        productRepo.save(new Product("Chickenburger", 7.5, Category.HAMBURGER));
-        productRepo.save(new Product("American Burger", 8.5, Category.HAMBURGER));
-        productRepo.save(new Product("BBQ Burger", 9.5, Category.HAMBURGER));
-        productRepo.save(new Product("Pepperoni Pollo", 7.5, Category.PIADINE));
-        productRepo.save(new Product("Pollo BBQ", 7.0, Category.PIADINE));
-        productRepo.save(new Product("Cola", 1.5, Category.BEVANDE));
-        productRepo.save(new Product("Spite", 1.5, Category.BEVANDE));
-        productRepo.save(new Product("Fata", 1.5, Category.BEVANDE));
-    }
+//    @PostConstruct
+//    public void init() {
+//        productRepo.save(new Product("Chickenburger", 7.5, Category.HAMBURGER));
+//        productRepo.save(new Product("American Burger", 8.5, Category.HAMBURGER));
+//        productRepo.save(new Product("BBQ Burger", 9.5, Category.HAMBURGER));
+//        productRepo.save(new Product("Pepperoni Pollo", 7.5, Category.PIADINE));
+//        productRepo.save(new Product("Pollo BBQ", 7.0, Category.PIADINE));
+//        productRepo.save(new Product("Cola", 1.5, Category.BEVANDE));
+//        productRepo.save(new Product("Spite", 1.5, Category.BEVANDE));
+//        productRepo.save(new Product("Fata", 1.5, Category.BEVANDE));
+//    }
 
     public Product create(Product body) {
         Product newProduct = new Product(body.getName(), body.getDescription(), body.getPrice());

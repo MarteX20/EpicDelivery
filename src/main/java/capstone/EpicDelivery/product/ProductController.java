@@ -10,13 +10,13 @@ import org.springframework.web.bind.annotation.*;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/users/products")
+@RequestMapping("/products")
 public class ProductController {
     private final ProductService productService;
 
     @Autowired
-    public ProductController(ProductService productServ) {
-        this.productService = productServ;
+    public ProductController(ProductService productService) {
+        this.productService = productService;
     }
 
     @GetMapping
@@ -51,3 +51,4 @@ public class ProductController {
         productService.findByIdAndDelete(productId);
     }
 }
+
