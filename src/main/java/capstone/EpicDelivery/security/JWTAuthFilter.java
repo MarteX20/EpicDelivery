@@ -52,6 +52,4 @@ public class JWTAuthFilter extends OncePerRequestFilter {
         System.out.println(request.getServletPath());
         return new AntPathMatcher().match("/auth/**", request.getServletPath());
     }
-
 }
-
