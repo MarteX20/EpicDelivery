@@ -18,7 +18,7 @@ public class Product {
     private UUID id;
 
     private String name;
-    @Column(length = 550)
+
     private String description;
     private String img;
     private double price;
