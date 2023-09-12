@@ -1,33 +1,34 @@
 package capstone.EpicDelivery.product;
 
-import capstone.EpicDelivery.enums.Category;
+import capstone.EpicDelivery.category.Category;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.UUID;
 
 @Entity
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "products")
 public class Product {
+
     @Id
     @GeneratedValue
     private UUID id;
 
-    private String name;
+    private String productName;
 
     private String description;
     private String img;
     private double price;
+    private int quantity;
 
-    @Enumerated(EnumType.STRING)
+    @Embedded
+    @OneToOne(cascade = CascadeType.ALL)
     private Category category;
 
     public Product(String name, String description, String img,double price, Category category) {
-        this.name = name;
+        this.productName = name;
         this.price = price;
         this.description = description;
         this.img = img;
@@ -35,7 +36,7 @@ public class Product {
     }
 
     public Product(String name, String description, String img, double price) {
-        this.name = name;
+        this.productName = name;
         this.price = price;
         this.description = description;
         this.img = img;
