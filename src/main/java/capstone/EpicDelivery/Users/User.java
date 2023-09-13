@@ -1,7 +1,7 @@
 package capstone.EpicDelivery.Users;
 
 import capstone.EpicDelivery.enums.Role;
-import capstone.EpicDelivery.order.Order;
+//import capstone.EpicDelivery.order.Order;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
@@ -40,9 +40,9 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    @JsonManagedReference
-    private List<Order> orders = new ArrayList<>();
+//    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+//    @JsonManagedReference
+//    private List<Order> orders = new ArrayList<>();
 
     public User(String name, String surname,String address, String email, String tel, String password) {
         this.name = name;

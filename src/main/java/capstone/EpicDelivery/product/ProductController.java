@@ -1,5 +1,6 @@
 package capstone.EpicDelivery.product;
 
+import jakarta.annotation.security.PermitAll;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -20,6 +21,7 @@ public class ProductController {
     }
 
     @GetMapping
+    @PermitAll
     public Page<Product> getProducts(@RequestParam(defaultValue = "0") int page,
                                      @RequestParam(defaultValue = "10") int size,
                                      @RequestParam(defaultValue = "id") String sortBy) {
@@ -35,7 +37,7 @@ public class ProductController {
     @ResponseStatus(HttpStatus.CREATED)
     @PreAuthorize("hasAuthority('ADMIN')")
     public Product createProduct(@Valid @RequestBody Product body) {
-        return productService.create(body);
+        return productService.addItem(body);
     }
 
     @PutMapping("/{productId}")

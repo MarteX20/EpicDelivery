@@ -35,15 +35,15 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<ErrorDetails>(err, HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler
-    public ResponseEntity<ErrorDetails> orderExceptionHandler(ProductException pe, WebRequest wr){
-        ErrorDetails err = new ErrorDetails();
-
-        err.setLocalDateTime(LocalDateTime.now());
-        err.setMessage(pe.getMessage());
-        err.setDetails(wr.getDescription(false));
-
-        return new ResponseEntity<ErrorDetails>(err, HttpStatus.BAD_REQUEST);
-    }
+//    @ExceptionHandler
+//    public ResponseEntity<ErrorDetails> orderExceptionHandler(ProductException pe, WebRequest wr){
+//        ErrorDetails err = new ErrorDetails();
+//
+//        err.setLocalDateTime(LocalDateTime.now());
+//        err.setMessage(pe.getMessage());
+//        err.setDetails(wr.getDescription(false));
+//
+//        return new ResponseEntity<ErrorDetails>(err, HttpStatus.BAD_REQUEST);
+//    }
 
 }

@@ -28,11 +28,7 @@ public class JWTAuthFilter extends OncePerRequestFilter {
 
     private static final String[] PUBLIC_ROUTES = { "/product/**" };
     private static final String[] ADMIN_ROUTES = {
-            "/product",        // POST per creare un nuovo prodotto
             "/products/*",     // PUT e DELETE per modificare o eliminare un prodotto
-            "/indirizzo",      // GET per vedere tutti gli indirizzi
-            "/order",          // POST per creare un nuovo ordine
-            "/order/*",        // PUT e DELETE per modificare o eliminare un ordine
             "/user",           // GET per vedere tutti gli utenti
             "/user/*"          // PUT e DELETE per modificare o eliminare un utente
     };
@@ -41,6 +37,11 @@ public class JWTAuthFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
         String authHeader = request.getHeader("Authorization");
+
+        if (isPublicRoute(request.getServletPath())) {
+            filterChain.doFilter(request, response);
+            return;
+        }
 
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
             throw new UnauthorizedException("Per favore passa il token nell'authorization header");
@@ -69,17 +70,18 @@ public class JWTAuthFilter extends OncePerRequestFilter {
         }
     }
 
-    // Verifica se la route è pubblica per le richieste GET
+
     private boolean isPublicRoute(String servletPath) {
         for (String publicRoute : PUBLIC_ROUTES) {
             if (new AntPathMatcher().match(publicRoute, servletPath)) {
                 return true;
             }
         }
-        return false;
+
+        return new AntPathMatcher().match("/product/**", servletPath);
     }
 
-    // Verifica se la route richiede il ruolo di admin
+
     private boolean isAdminRoute(String servletPath) {
         for (String adminRoute : ADMIN_ROUTES) {
             if (new AntPathMatcher().match(adminRoute, servletPath)) {
@@ -91,7 +93,11 @@ public class JWTAuthFilter extends OncePerRequestFilter {
 
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) {
-        System.out.println(request.getServletPath());
+
+        if (new AntPathMatcher().match("/products/**", request.getServletPath())){
+            return true;
+        }
+
         return new AntPathMatcher().match("/auth/**", request.getServletPath());
     }
 }

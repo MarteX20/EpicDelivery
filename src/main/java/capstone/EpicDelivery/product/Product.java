@@ -1,6 +1,6 @@
 package capstone.EpicDelivery.product;
 
-import capstone.EpicDelivery.category.Category;
+import capstone.EpicDelivery.enums.Category;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -23,8 +23,7 @@ public class Product {
     private double price;
     private int quantity;
 
-    @Embedded
-    @OneToOne(cascade = CascadeType.ALL)
+    @Enumerated(EnumType.STRING)
     private Category category;
 
     public Product(String name, String description, String img,double price, Category category) {
@@ -33,12 +32,5 @@ public class Product {
         this.description = description;
         this.img = img;
         this.category = category;
-    }
-
-    public Product(String name, String description, String img, double price) {
-        this.productName = name;
-        this.price = price;
-        this.description = description;
-        this.img = img;
     }
 }

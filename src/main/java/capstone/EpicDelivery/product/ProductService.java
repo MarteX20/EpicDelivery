@@ -1,17 +1,15 @@
 package capstone.EpicDelivery.product;
 
-
 import capstone.EpicDelivery.enums.Category;
 import capstone.EpicDelivery.exceptions.NotFoundException;
+import capstone.EpicDelivery.exceptions.ProductException;
 import jakarta.annotation.PostConstruct;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -37,9 +35,13 @@ public class ProductService {
 //        productRepo.save(new Product("Fanta","", "https://beedrunk.it/wp-content/uploads/2017/11/fanta-33-cl-sleek.png",7.5, Category.BEVANDE));
 //    }
 
-    public Product create(Product body) {
-        Product newProduct = new Product(body.getName(), body.getDescription(), body.getImg(), body.getPrice());
-        return productRepo.save(newProduct);
+    public Product addItem(Product item) throws ProductException {
+        Optional<Product> opt = productRepo.findById(item.getId());
+        if(opt.isPresent()) {
+            throw new ProductException("Item already exists..");
+        }else {
+            return productRepo.save(item);
+        }
     }
 
     public Page<Product> find(int page, int size, String sort) {
@@ -53,7 +55,7 @@ public class ProductService {
 
     public Product findByIdAndUpdate(UUID id, Product body) throws NotFoundException {
         Product found = this.findById(id);
-        found.setName(body.getName());
+        found.setProductName(body.getProductName());
         found.setDescription(body.getDescription());
         found.setPrice(body.getPrice());
 
