@@ -1,8 +1,11 @@
 package capstone.EpicDelivery.security;
 
 import capstone.EpicDelivery.Users.User;
+import capstone.EpicDelivery.Users.UsersRepository;
 import capstone.EpicDelivery.exceptions.UnauthorizedException;
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -14,14 +17,29 @@ public class JWTTools {
 
     @Value("PLL9KDLP467QJYCH8X8MYZLP1HK1J3Z6")
     private String secret;
+    private final UsersRepository usersRepository;
 
-    public String createToken(User u) {
-        String token = Jwts.builder().setSubject(u.getId().toString())
+    public JWTTools(UsersRepository usersRepository) {
+        this.usersRepository = usersRepository;
+    }
+
+    public String createToken(User user) {
+        Claims claims = Jwts.claims().setSubject(user.getId().toString());
+
+
+        claims.put("name", user.getName());
+        claims.put("email", user.getEmail());
+        claims.put("tel", user.getTel());
+        claims.put("address", user.getAddress());
+
+
+        String token = Jwts.builder()
+                .setClaims(claims)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 24 * 7))
-                // token
-                .signWith(Keys.hmacShaKeyFor(secret.getBytes()))
+                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 24 * 7)) // Scade dopo 7 giorni
+                .signWith(Keys.hmacShaKeyFor(secret.getBytes()), SignatureAlgorithm.HS256)
                 .compact();
+
         return token;
     }
 

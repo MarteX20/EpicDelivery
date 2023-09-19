@@ -5,6 +5,7 @@ import capstone.EpicDelivery.enums.Role;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
@@ -20,7 +21,8 @@ import java.util.UUID;
 @Data
 @Table(name = "users")
 @NoArgsConstructor
-@JsonIgnoreProperties({ "password", "accountNonExpired", "authorities", "credentialsNonExpired", "accountNonLocked" })
+@AllArgsConstructor
+@JsonIgnoreProperties({ "password", "accountNonExpired", "authorities", "credentialsNonExpired", "accountNonLocked", "username", "enabled" })
 public class User implements UserDetails {
 
     @Id
@@ -44,7 +46,7 @@ public class User implements UserDetails {
 //    @JsonManagedReference
 //    private List<Order> orders = new ArrayList<>();
 
-    public User(String name, String surname,String address, String email, String tel, String password) {
+    public User(String name, String surname,String password, String email, String tel, String address) {
         this.name = name;
         this.surname = surname;
         this.address = address;
