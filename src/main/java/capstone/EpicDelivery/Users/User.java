@@ -42,9 +42,10 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-//    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-//    @JsonManagedReference
-//    private List<Order> orders = new ArrayList<>();
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "cart_id", referencedColumnName = "id")
+    @JsonManagedReference
+    private Cart cart;
 
     public User(String name, String surname,String password, String email, String tel, String address) {
         this.name = name;
