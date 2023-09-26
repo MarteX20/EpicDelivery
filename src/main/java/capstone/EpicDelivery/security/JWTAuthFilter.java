@@ -26,11 +26,11 @@ public class JWTAuthFilter extends OncePerRequestFilter {
     @Autowired
     UsersService usersService;
 
-    private static final String[] PUBLIC_ROUTES = { "/product/**" };
+    private static final String[] PUBLIC_ROUTES = { "/product/**", "/cart/**", "/cart" };
     private static final String[] ADMIN_ROUTES = {
             "/products/*",     // PUT e DELETE per modificare o eliminare un prodotto
             "/user",           // GET per vedere tutti gli utenti
-            "/user/*"          // PUT e DELETE per modificare o eliminare un utente
+            "/user/*"
     };
 
     @Override

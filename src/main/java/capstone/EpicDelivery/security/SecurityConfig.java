@@ -29,6 +29,8 @@ public class SecurityConfig {
         http.authorizeHttpRequests(auth -> auth.requestMatchers("/users/**").authenticated());
         http.authorizeHttpRequests(auth -> auth.requestMatchers("/auth/**").permitAll());
         http.authorizeHttpRequests(auth -> auth.requestMatchers("/products/**").permitAll());
+        http.authorizeHttpRequests(auth -> auth.requestMatchers("/cart").permitAll());
+        http.authorizeHttpRequests(auth -> auth.requestMatchers("/cart/**").permitAll());
 
         http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
         http.addFilterBefore(corsFilter, JWTAuthFilter.class);

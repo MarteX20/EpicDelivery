@@ -1,5 +1,6 @@
-package capstone.EpicDelivery.Users;
+package capstone.EpicDelivery.cart;
 
+import capstone.EpicDelivery.Users.User;
 import capstone.EpicDelivery.product.Product;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
@@ -18,7 +19,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "carts")
-public class Cart {
+public class Cart  {
 
     @Id
     @GeneratedValue

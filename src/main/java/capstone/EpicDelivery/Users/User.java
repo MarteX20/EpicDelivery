@@ -1,5 +1,6 @@
 package capstone.EpicDelivery.Users;
 
+import capstone.EpicDelivery.cart.Cart;
 import capstone.EpicDelivery.enums.Role;
 //import capstone.EpicDelivery.order.Order;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -12,7 +13,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
