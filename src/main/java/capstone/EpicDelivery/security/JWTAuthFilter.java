@@ -28,8 +28,8 @@ public class JWTAuthFilter extends OncePerRequestFilter {
 
     private static final String[] PUBLIC_ROUTES = { "/product/**", "/cart/**", "/cart" };
     private static final String[] ADMIN_ROUTES = {
-            "/products/*",     // PUT e DELETE per modificare o eliminare un prodotto
-            "/user",           // GET per vedere tutti gli utenti
+            "/products/*",
+            "/user",
             "/user/*"
     };
 

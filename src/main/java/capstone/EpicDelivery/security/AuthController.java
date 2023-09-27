@@ -7,7 +7,10 @@ import capstone.EpicDelivery.Users.payloads.UserLoginPayload;
 import capstone.EpicDelivery.Users.payloads.UserRequestPayload;
 import capstone.EpicDelivery.exceptions.UnauthorizedException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseCookie;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -46,4 +49,10 @@ public class AuthController {
         }
     }
 
+    @PostMapping("/logout")
+    public ResponseEntity<?> logoutUser() {
+        ResponseCookie cookie = jwtTools.getCleanJwtCookie();
+        return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, cookie.toString())
+                .body(new MessageResponse("You've been signed out!"));
+    }
 }

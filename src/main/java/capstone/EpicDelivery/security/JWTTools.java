@@ -8,6 +8,7 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ResponseCookie;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
@@ -17,6 +18,9 @@ public class JWTTools {
 
     @Value("PLL9KDLP467QJYCH8X8MYZLP1HK1J3Z6")
     private String secret;
+
+    @Value("quu")
+    private String jwtCookie;
     private final UsersRepository usersRepository;
 
     public JWTTools(UsersRepository usersRepository) {
@@ -41,6 +45,11 @@ public class JWTTools {
                 .compact();
 
         return token;
+    }
+
+    public ResponseCookie getCleanJwtCookie() {
+        ResponseCookie cookie = ResponseCookie.from(jwtCookie, null).path("/api").build();
+        return cookie;
     }
 
     public void verifyToken(String token) {
