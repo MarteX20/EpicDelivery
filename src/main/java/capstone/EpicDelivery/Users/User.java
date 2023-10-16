@@ -1,5 +1,6 @@
 package capstone.EpicDelivery.Users;
 
+import capstone.EpicDelivery.Order.Order;
 import capstone.EpicDelivery.cart.Cart;
 import capstone.EpicDelivery.enums.Role;
 //import capstone.EpicDelivery.order.Order;
@@ -13,6 +14,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
@@ -46,6 +48,10 @@ public class User implements UserDetails {
     @JoinColumn(name = "cart_id", referencedColumnName = "id")
     @JsonManagedReference
     private Cart cart;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonManagedReference
+    private List<Order> orderHistory = new ArrayList<>();
 
     public User(String name, String surname,String password, String email, String tel, String address) {
         this.name = name;

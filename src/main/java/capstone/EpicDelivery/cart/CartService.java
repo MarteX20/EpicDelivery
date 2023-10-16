@@ -1,5 +1,6 @@
 package capstone.EpicDelivery.cart;
 
+import capstone.EpicDelivery.Order.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -41,5 +42,16 @@ public class CartService {
         cartRepository.deleteById(itemId);
     }
 
+    public void checkout(Cart cart) {
+        Order order = new Order();
+        order.setUser(cart.getUser());
+        order.setProducts(new ArrayList<>(cart.getProducts()));
+
+        // Aggiungi l'ordine alla storia dell'utente
+        cart.getUser().getOrderHistory().add(order);
+
+        // Opzionale: svuotare il carrello dopo l'ordine
+        cart.getProducts().clear();
+    }
 }
 
